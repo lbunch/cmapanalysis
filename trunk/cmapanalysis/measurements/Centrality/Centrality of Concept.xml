@@ -1,0 +1,16 @@
+<cmap-measure xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+	<Label>Centrality of Concept</Label>
+	<Description></Description>
+	<Option id="ConceptLabel" description="Computes the centrality (number of connections in or out) of the given concept; not case sensitive."/>
+	<DataType>String</DataType>
+	<XQueryExpression>
+
+      let $centralityCpt1 := "[[**Option_ConceptLabel**]]"
+      let $matchingConcepts := local:concept-centrality($map)/cm:concept[lower-case(normalize-space(@label)) = lower-case(normalize-space($centralityCpt1))]
+      return
+          concat( $centralityCpt1, "=", sum( $matchingConcepts/@centrality ) )
+       
+    </XQueryExpression>
+
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

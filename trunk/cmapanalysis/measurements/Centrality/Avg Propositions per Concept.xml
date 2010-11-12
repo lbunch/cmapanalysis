@@ -1,0 +1,15 @@
+<cmap-measure xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+	<Label>Avg Propositions Per Concept</Label>
+	<Description>The ratio of the number of propositions to the number of concepts in the cmap</Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+
+      let $cptCnt := count($map/cm:cmap/cm:map/cm:concept-list/cm:concept)
+      return
+      	if ($cptCnt = 0) then 0
+      	else count( local:propositions($map)/cm:proposition ) div  $cptCnt
+       
+    </XQueryExpression>
+
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

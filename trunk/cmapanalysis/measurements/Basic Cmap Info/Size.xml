@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Size</Label>
+	<Description>The size of the concept map in bytes</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:extent/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

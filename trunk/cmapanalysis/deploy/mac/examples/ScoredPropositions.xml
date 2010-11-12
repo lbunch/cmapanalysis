@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proposition-score-list xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+    <cm:proposition score="1">
+        <cm:concept label="BME Design Process"/>
+        <cm:linking-phrase label="includes"/>
+        <cm:concept label="new ideas"/>
+    </cm:proposition>
+    <cm:proposition score="1">
+        <cm:concept label="BME Design Process"/>
+        <cm:linking-phrase label="generates"/>
+        <cm:concept label="new ideas"/>
+    </cm:proposition>
+    <cm:proposition score=".75">
+        <cm:concept label="BME Design Process"/>
+        <cm:linking-phrase label="involves"/>
+        <cm:concept label="brainstorming"/>
+    </cm:proposition>
+    <cm:proposition score=".5">
+        <cm:concept label="FDA approval"/>
+        <cm:linking-phrase label="leads to"/>
+        <cm:concept label="product on the market"/>
+    </cm:proposition>
+    
+</proposition-score-list>

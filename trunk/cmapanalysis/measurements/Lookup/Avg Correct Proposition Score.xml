@@ -1,0 +1,12 @@
+<cmap-measure>
+	<Label>Avg Correct Proposition Score</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<Reference id="CorrectPropositions" description="An XML file containing a list of propositions each with a score"></Reference>
+	<XQueryExpression>
+	
+	avg (local:correct-propositions($map, doc("[[**Reference_CorrectPropositions**]]"))/cm:proposition/@score)
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

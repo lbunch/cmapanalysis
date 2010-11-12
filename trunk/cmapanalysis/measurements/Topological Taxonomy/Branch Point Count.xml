@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Branch Point Count</Label>
+	<Description>The sum of all connections going out of either concepts or linking phrases</Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+	
+	count(distinct-values( local:branch-points($map)/cma:branch-point/node()/@label) )
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

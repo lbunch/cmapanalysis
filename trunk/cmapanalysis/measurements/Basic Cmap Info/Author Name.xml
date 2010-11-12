@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Author Name</Label>
+	<Description>The full name of the author of the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:contributor/vcard:FN/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

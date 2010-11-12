@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Orphan Count</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+	
+	count( local:orphaned-concepts($map)/cm:concept )
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

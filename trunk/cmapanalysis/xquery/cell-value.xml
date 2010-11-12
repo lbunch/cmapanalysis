@@ -1,0 +1,5 @@
+       <Cell label="[[**Label**]]"> 
+           <Data ss:Type="[[**DataType**]]">
+            { [[**XQueryExpression**]] }
+           </Data>
+       </Cell>  

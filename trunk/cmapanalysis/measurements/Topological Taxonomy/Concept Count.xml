@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Concept Count</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+	
+	count( $map/cm:cmap/cm:map/cm:concept-list/cm:concept )
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

@@ -1,0 +1,13 @@
+<cmap-measure xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+	<Label>Inter-Cluster Proposition Count</Label>
+	<Description>Number of propositions within a cluster of concepts</Description>
+	<DataType>String</DataType>
+	<Reference id="ClusterFile" description="An XML file containing a list of clusters of concepts"></Reference>
+	<XQueryExpression>
+
+    count(local:inter-cluster-propositions($map, doc("[[**Reference_ClusterFile**]]"))//cm:proposition)
+       
+    </XQueryExpression>
+
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

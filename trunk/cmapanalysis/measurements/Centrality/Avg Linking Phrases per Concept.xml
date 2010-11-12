@@ -1,0 +1,15 @@
+<cmap-measure xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+	<Label>Avg Linking Phrases per Concept</Label>
+	<Description>The ratio of linking phrases to the number of concepts in the cmap</Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+
+      let $cptCnt := count($map/cm:cmap/cm:map/cm:concept-list/cm:concept)
+      return
+      	if ($cptCnt = 0) then 0
+      	else count($map/cm:cmap/cm:map/cm:linking-phrase-list/cm:linking-phrase) div  $cptCnt
+       
+    </XQueryExpression>
+
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

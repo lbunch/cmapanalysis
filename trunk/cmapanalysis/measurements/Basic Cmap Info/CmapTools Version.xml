@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>CmapTools Version</Label>
+	<Description>The version of CmapTools last used to save the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:publisher/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

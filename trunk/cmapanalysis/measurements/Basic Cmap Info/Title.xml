@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Title</Label>
+	<Description>The title (and filename) of the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:title/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

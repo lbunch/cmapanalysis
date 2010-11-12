@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Author Email</Label>
+	<Description>The email address of the author of the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:contributor/vcard:EMAIL/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

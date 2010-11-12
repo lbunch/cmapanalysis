@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmap xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://cmap.ihmc.us/xml/cmap/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+    <res-meta>
+        <dc:title>victoriano jimenez</dc:title>
+        <dc:description>¿quien es victorianosjimenez?</dc:description>
+        <dc:contributor>
+            <vcard:FN>victorianos jimenez</vcard:FN>
+        </dc:contributor>
+        <dcterms:created>2008-11-20T09:54:58-05:00</dcterms:created>
+        <dcterms:modified>2008-11-20T09:54:57-05:00</dcterms:modified>
+        <dc:language>es</dc:language>
+        <dc:format>x-cmap/x-storable</dc:format>
+        <dc:publisher>FIHMC CmapTools 4.14</dc:publisher>
+        <dc:extent>5964 bytes</dc:extent>
+        <dc:source>cmap:1195171949010_62985537_0:1224691945506_1491361082_3441:1227192903741_662244306_2546</dc:source>
+    </res-meta>
+    <map width="1265" height="707">
+        <style-sheet-list>
+            <style-sheet id="_Default_">
+                <map-style background-color="255,255,255,0" image-style="full" image-top-left="0,0"/>
+                <concept-style font-name="Verdana" font-size="12" font-style="plain" font-color="0,0,0,255" text-margin="4" background-color="237,244,246,255" background-image-style="full" border-color="0,0,0,255" border-style="solid" border-thickness="1"
+                    border-shape="rounded-rectangle" text-alignment="center" shadow-color="none"/>
+                <linking-phrase-style font-name="Verdana" font-size="12" font-style="plain" font-color="0,0,0,255" text-margin="1" background-color="0,0,255,0" background-image-style="full" border-color="0,0,0,0" border-style="solid" border-thickness="1"
+                    border-shape="rectangle" text-alignment="center" shadow-color="none"/>
+                <connection-style color="0,0,0,255" style="solid" thickness="1" type="straight" arrowhead="if-to-concept-and-slopes-up"/>
+                <resource-style font-name="SanSerif" font-size="12" font-style="plain" font-color="0,0,0,255" background-color="192,192,192,255"/>
+            </style-sheet>
+        </style-sheet-list>
+        <extra-graphical-properties-list>
+            <properties-list id="1227192903741_662244306_2546">
+                <property key="StyleSheetGroup_0" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?> &#xa;&lt;java version=&quot;1.5.0_11&quot; class=&quot;java.beans.XMLDecoder&quot;> &#xa; &lt;string>//*@!#$%%^&amp;amp;*()() No Grouped StyleSheets @&lt;/string> &#xa;&lt;/java> &#xa;"/>
+            </properties-list>
+        </extra-graphical-properties-list>
+    </map>
+</cmap>

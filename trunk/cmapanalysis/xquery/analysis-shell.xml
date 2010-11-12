@@ -1,0 +1,261 @@
+declare namespace  cm="http://cmap.ihmc.us/xml/cmap/";
+declare namespace  cma="http://cmap.ihmc.us/xml/cmapanalysis/";
+declare namespace dcterms="http://purl.org/dc/terms/";
+declare namespace dc="http://purl.org/dc/elements/1.1/";
+declare namespace vcard="http://www.w3.org/2001/vcard-rdf/3.0#";
+declare namespace taxo="java:nlk.analysisTool.taxonomy.TaxonomyProxy";
+
+declare function local:propositions($map as document-node()) as element(proposition-list)
+{
+   <proposition-list>
+   {
+   for $lp in $map//cm:linking-phrase
+                   let $conn1 := $map/cm:cmap/cm:map/cm:connection-list/cm:connection[@to-id = $lp/@id],
+                        $conn2 := $map/cm:cmap/cm:map/cm:connection-list/cm:connection[@from-id = $lp/@id],
+                        $cpt1 := $map/cm:cmap/cm:map/cm:concept-list/cm:concept[@id = $conn1/@from-id],
+                        $cpt2 := $map/cm:cmap/cm:map/cm:concept-list/cm:concept[@id = $conn2/@to-id] 
+                    for $i in (1 to count($cpt1)),
+                          $j in  (1 to count($cpt2))
+                          return
+                                <cm:proposition> {$cpt1[$i], $lp, $cpt2[$j]} </cm:proposition>
+   }
+   </proposition-list>
+ };
+ 
+declare function local:propositions-text($map as document-node()) as element(proposition-list)
+ {
+   <proposition-list>
+   {
+   for $lp in $map//cm:linking-phrase
+                   let $conn1 := $map/cm:cmap/cm:map/cm:connection-list/cm:connection[@to-id = $lp/@id],
+                        $conn2 := $map/cm:cmap/cm:map/cm:connection-list/cm:connection[@from-id = $lp/@id],
+                        $cpt1 := $map/cm:cmap/cm:map/cm:concept-list/cm:concept[@id = $conn1/@from-id],
+                        $cpt2 := $map/cm:cmap/cm:map/cm:concept-list/cm:concept[@id = $conn2/@to-id] 
+                    for $i in (1 to count($cpt1)),
+                          $j in  (1 to count($cpt2))
+                          return
+                                <cma:proposition-text> {concat($cpt1[$i]/@label, "  ", $lp/@label, "  ",  $cpt2[$j]/@label) } </cma:proposition-text>
+   }
+   </proposition-list>
+ };
+ 
+declare function local:correct-propositions($map as document-node(), $scores as document-node()) as element(proposition-list)
+ {
+     <proposition-list>
+     {
+                    for $prop in local:propositions($map)/cm:proposition,
+                      $correctProp in $scores/proposition-score-list/cm:proposition
+                          return $correctProp[cm:concept[1]/@label = $prop/cm:concept[1]/@label  
+                                                              and cm:linking-phrase[1]/@label = $prop/cm:linking-phrase[1]/@label 
+                                                              and cm:concept[2]/@label = $prop/cm:concept[2]/@label]
+    }
+    </proposition-list>
+ };
+ 
+declare function local:concept-words($map as document-node()) as element(concept-word-list)
+{
+<concept-word-list>
+    {
+            for $concept in $map/cm:cmap/cm:map/cm:concept-list/cm:concept
+            return 
+                <cm:concept>
+                    {
+                    for $i in tokenize($concept/@label, "\s+" )
+                    return <cma:word>{$i}</cma:word>
+                    }
+                </cm:concept>
+    }
+</concept-word-list>
+};
+
+declare function local:branch-points($map as document-node()) as element(branch-point-list)
+{
+<branch-point-list>
+    {
+        for $conn1 in $map/cm:cmap/cm:map/cm:connection-list/cm:connection,
+              $conn2 in $map/cm:cmap/cm:map/cm:connection-list/cm:connection
+       where
+               $conn1/@id != $conn2/@id and
+               $conn1/@from-id = $conn2/@from-id
+       return 
+       <cma:branch-point>
+               {$map/cm:cmap/cm:map/cm:concept-list/cm:concept[@id = $conn1/@from-id]}
+              {$map/cm:cmap/cm:map/cm:linking-phrase-list/cm:linking-phrase[@id = $conn1/@from-id]}
+        </cma:branch-point>    
+    }
+</branch-point-list>
+};
+
+declare function local:root-concepts($map as document-node()) as element(root-concept-list)
+{
+<root-concept-list>
+{
+    for $cpt in $map/cm:cmap/cm:map/cm:concept-list/cm:concept
+    where exists($map/cm:cmap/cm:map/cm:connection-list/cm:connection[@from-id = $cpt/@id]) and
+                 not(exists($map/cm:cmap/cm:map/cm:connection-list/cm:connection[@to-id = $cpt/@id]))
+    return $cpt
+}
+</root-concept-list>
+};
+
+declare function local:orphaned-concepts($map as document-node()) as element(orphaned-concept-list)
+{
+<orphaned-concept-list>
+{
+    for $cpt in $map/cm:cmap/cm:map/cm:concept-list/cm:concept
+    where not(exists($map/cm:cmap/cm:map/cm:connection-list/cm:connection[@from-id = $cpt/@id])) and
+                 not(exists($map/cm:cmap/cm:map/cm:connection-list/cm:connection[@to-id = $cpt/@id]))
+    return $cpt
+}
+</orphaned-concept-list>
+};
+
+declare function local:child-concepts($map as document-node(), $cpt as element(cm:concept)) as element(child-concept-list)
+{
+<child-concept-list cpt="{$cpt/@label}">
+{
+     for $cptoutconn in $map/cm:cmap/cm:map/cm:connection-list/cm:connection[@from-id = $cpt/@id]
+     let $lpid := $cptoutconn/@to-id
+     let $lpoutconn := $map/cm:cmap/cm:map/cm:connection-list/cm:connection[@from-id = $lpid]
+     let $childcptid :=  $lpoutconn/@to-id
+     return
+     $map/cm:cmap/cm:map/cm:concept-list/cm:concept[@id = $childcptid and not ($childcptid = $cpt/@id) ]
+}
+</child-concept-list>
+};
+
+declare function local:all-child-concepts($map as document-node(), $cpt as element(cm:concept), $excludeCpts as element(cm:concept)*) as element(child-concept-list)
+{
+<child-concept-list cpt="{$cpt/@label}">
+{
+    let $immediateChildren := local:child-concepts($map, $cpt)/cm:concept
+    let $filteredImChildren := $immediateChildren except $excludeCpts
+    let $filteredImChildren := $filteredImChildren except $cpt
+    return $filteredImChildren
+}
+{
+    let $immediateChildren := local:child-concepts($map, $cpt)/cm:concept
+    let $filteredImChildren := $immediateChildren except $excludeCpts
+    let $filteredImChildren := $filteredImChildren except $cpt
+    let $excludePlusImChildren := $excludeCpts union $filteredImChildren union $cpt
+    for $childCpt in $filteredImChildren
+    return  local:all-child-concepts($map, $childCpt, $excludePlusImChildren)/cm:concept
+}
+</child-concept-list>
+};
+
+declare function local:concept-connections($map as document-node()) as element(concept-connection-list)
+{
+<concept-connection-list>
+    {
+       for $cpt in $map/cm:cmap/cm:map/cm:concept-list/cm:concept,
+              $conn in $map/cm:cmap/cm:map/cm:connection-list/cm:connection
+       where
+               $cpt/@id = $conn/@from-id or
+               $cpt/@id = $conn/@to-id
+       order by 
+               $cpt/@id
+       return 
+       <concept-connection concept-id="{$cpt/@id}" concept-label="{$cpt/@label}" connection-id="{$conn/@id}"/>
+
+    }
+</concept-connection-list>
+};
+
+declare function local:concept-centrality($map as document-node()) as element(cm:concept-list)
+{
+<cm:concept-list>
+{
+    let $cpt-conns := local:concept-connections($map)
+    for $cpt in $map/cm:cmap/cm:map/cm:concept-list/cm:concept
+    let $centrality := count($cpt-conns/concept-connection[@concept-id = $cpt/@id])
+    order by $centrality descending
+    return
+            <cm:concept id="{$cpt/@id}" label="{$cpt/@label}" centrality="{$centrality}"/>
+}
+</cm:concept-list>
+};
+
+declare function local:intra-cluster-propositions($map as document-node(), $clusters as document-node()) as element(cluster-list)
+ {
+     <cluster-list>
+     {
+             for $cluster in $clusters/cluster-list/cluster
+             return
+             <cluster id="{$cluster/@id}">
+             {
+                    for $prop in local:propositions($map)/cm:proposition,
+                      $clusterCpt1 in $cluster/cm:concept,
+                      $clusterCpt2 in $cluster/cm:concept
+                      where
+                      $clusterCpt1/parent::*/@id = $clusterCpt2/parent::*/@id 
+                          and lower-case(normalize-space($prop/cm:concept[1]/@label)) = lower-case(normalize-space($clusterCpt1/@label))
+                          and lower-case(normalize-space($prop/cm:concept[2]/@label)) = lower-case(normalize-space($clusterCpt2/@label))
+                          return $prop
+             }
+             </cluster>
+    }
+    </cluster-list>
+ };
+ 
+declare function local:inter-cluster-propositions($map as document-node(), $clusters as document-node()) as element(cluster-list)
+ {
+     <cluster-list>
+     {
+             for $cluster1 in $clusters/cluster-list/cluster,
+                   $cluster2 in $clusters/cluster-list/cluster
+             where $cluster1/@id != $cluster2/@id
+             return
+             <cluster id="{$cluster1/@id}" id2="{$cluster2/@id}">
+             {
+                    for $prop in local:propositions($map)/cm:proposition,
+                      $clusterCpt1 in $cluster1/cm:concept,
+                      $clusterCpt2 in $cluster2/cm:concept
+                      where
+                          lower-case(normalize-space($prop/cm:concept[1]/@label)) = lower-case(normalize-space($clusterCpt1/@label))
+                          and lower-case(normalize-space($prop/cm:concept[2]/@label)) = lower-case(normalize-space($clusterCpt2/@label))
+                          return $prop
+             }
+             </cluster>
+    }
+    </cluster-list>
+ };
+ 
+[[**XQueryFunction**]]
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+    <Style ss:ID="s21">
+   <NumberFormat ss:Format="Fixed"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="cmap-analysis">
+  <Table>
+   <Row>
+   
+[[**column-header**]]
+ 
+   </Row>
+{for $map in collection("[[**input-directory**]]")
+return 
+   <Row>
+       
+[[**cell-value**]]
+ 
+   </Row>
+}
+  </Table>
+ </Worksheet>
+</Workbook>
+
+
+

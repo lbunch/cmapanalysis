@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cluster-list xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+<cluster id="Production">
+    <cm:concept label="Marketing"/>
+    <cm:concept label="teamwork"/>
+    <cm:concept label="interpersonal skills"/>
+    <cm:concept label="scientific needs"/>
+    <cm:concept label="trials"/>
+    <cm:concept label="Technical knowledge"/>
+    <cm:concept label="prototype"/>
+    <cm:concept label="prototypes"/>
+    <cm:concept label="product"/>
+    <cm:concept label="manufacturing"/>
+</cluster>
+</cluster-list>
