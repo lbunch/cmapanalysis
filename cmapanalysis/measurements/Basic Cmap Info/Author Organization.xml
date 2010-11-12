@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Author Organization</Label>
+	<Description>The company/organization of the author of the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:contributor/vcard:ORG/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

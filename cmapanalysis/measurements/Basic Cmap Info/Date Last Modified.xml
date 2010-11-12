@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Date Last Modified</Label>
+	<Description>The date and time the concept map was last saved</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:modified/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

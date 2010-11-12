@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cluster-list xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+    <cluster id="Design">
+        <cm:concept label="BME Design Process"/>
+        <cm:concept label="BME Design"/>
+        <cm:concept label="design"/>
+        <cm:concept label="literature review"/>
+        <cm:concept label="genesis of design process"/>
+        <cm:concept label="bioethics"/>
+        <cm:concept label="societal concerns"/>
+        <cm:concept label="innovation"/>
+        <cm:concept label="schedule"/>
+    </cluster>
+    <cluster id="Production">
+        <cm:concept label="Marketing"/>
+        <cm:concept label="teamwork"/>
+        <cm:concept label="interpersonal skills"/>
+        <cm:concept label="scientific needs"/>
+        <cm:concept label="trials"/>
+        <cm:concept label="Technical knowledge"/>
+        <cm:concept label="prototype"/>
+        <cm:concept label="prototypes"/>
+        <cm:concept label="product"/>
+        <cm:concept label="manufacturing"/>
+    </cluster>
+    <cluster id="Regulation">
+        <cm:concept label="Regulation"/>
+        <cm:concept label="policy"/>
+        <cm:concept label="protocols"/>
+        <cm:concept label="hazard analysis"/>
+    </cluster>
+</cluster-list>

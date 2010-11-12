@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cluster-list xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+<cluster id="Regulation">
+    <cm:concept label="Regulation"/>
+    <cm:concept label="policy"/>
+    <cm:concept label="protocols"/>
+    <cm:concept label="hazard analysis"/>
+</cluster>
+</cluster-list>

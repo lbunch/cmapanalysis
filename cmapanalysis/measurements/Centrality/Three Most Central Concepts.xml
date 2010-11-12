@@ -1,0 +1,19 @@
+<cmap-measure xmlns:cm="http://cmap.ihmc.us/xml/cmap/">
+	<Label>Three Most Central Concepts</Label>
+	<Description></Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+
+      let $centrality := local:concept-centrality($map)
+      let $cpt1 := $centrality/cm:concept[1]
+      let $cpt2 := $centrality/cm:concept[2]
+      let $cpt3 := $centrality/cm:concept[3]
+      return
+      concat( string($cpt1/@label), "=", string($cpt1/@centrality), ",", 
+                     string($cpt2/@label), "=", string($cpt2/@centrality), ",", 
+                     string($cpt3/@label), "=", string($cpt3/@centrality) )
+       
+    </XQueryExpression>
+
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

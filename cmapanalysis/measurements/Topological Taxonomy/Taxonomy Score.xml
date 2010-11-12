@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Taxonomy Score</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+
+		taxo:calcTaxonomyScore($map)
+        
+    </XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

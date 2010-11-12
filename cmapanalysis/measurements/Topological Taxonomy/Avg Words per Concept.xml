@@ -1,0 +1,20 @@
+<cmap-measure>
+	<Label>Avg Words per Concept</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+
+		if (count( local:concept-words($map)/cm:concept) > 0) then
+            (
+                round-half-to-even(
+                        count( local:concept-words($map)/cm:concept/cma:word)
+                    div  
+                        count( local:concept-words($map)/cm:concept) 
+                    , 5
+                )
+            )
+        else 0.0
+        
+    </XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

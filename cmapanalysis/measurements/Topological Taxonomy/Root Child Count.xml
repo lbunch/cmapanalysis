@@ -1,0 +1,15 @@
+<cmap-measure>
+	<Label>Root Child Count</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>	
+      if (exists($map/cm:cmap/cm:map/cm:concept-list/cm:concept)) then
+      (
+           let $rootCpt := local:root-concepts($map)/cm:concept 
+           return if (empty($rootCpt)) then (0) else
+			  count( local:child-concepts($map, $rootCpt[1])/cm:concept )
+      )
+      else 0	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

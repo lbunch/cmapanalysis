@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Date Created</Label>
+	<Description>The date and time the concept map was created</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dcterms:created/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

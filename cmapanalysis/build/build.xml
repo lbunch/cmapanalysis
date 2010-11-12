@@ -1,0 +1,57 @@
+<project name="CmapAnalyzer" default="run-CmapAnalyzer" basedir="..">
+	<description>
+		CmapAnalyzer build file
+    </description>
+	<!-- set global properties for this build -->
+	<property environment="env" />
+	<property name="source-dir" value="source" />
+	<property name="classes-dir" value="ant-classes" />
+	<property name="lib-dir" value="lib" />
+	
+	<target name="init">
+		<mkdir dir="${classes-dir}" />
+	</target>
+	
+	<target name="clean" depends="init">
+	  	<delete dir="${classes-dir}" />
+	</target>
+	
+	<target name="compile-CmapAnalyzer" depends="init">
+		<javac srcdir="${source-dir}" destdir="${classes-dir}" debug="yes">
+			<classpath>
+				<fileset dir="${lib-dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<include name="**/*.java" />
+		</javac>
+	</target>
+
+	<target name="copyProperties">
+		<copyfile dest="${classes-dir}/nlk/analysisTool/analysisTool.properties" src="${source-dir}/nlk/analysisTool/analysisTool.properties"/>
+	</target>
+
+	<target name="jar-CmapAnalyzer" depends="compile-CmapAnalyzer,copyProperties">
+		<!-- Put everything in ${build} into the ${lib}/.jar file -->
+		<jar jarfile="${lib-dir}/CmapAnalyzer.jar" basedir="${classes-dir}">
+			<include name="**/*.*" />
+		</jar>
+	</target>	
+	
+	<target name="deploy-CmapAnalyzer" depends="jar-CmapAnalyzer">
+		<copy verbose="true" file="${lib-dir}/CmapAnalyzer.jar" todir="C:/develop/Oxygen XML Editor 9/lib"></copy>
+	</target>
+	
+	<target name="run-CmapAnalyzer" depends="jar-CmapAnalyzer" description="starts CmapAnalyzer">
+		<java classname="nlk.analysisTool.gui.AnalysisPanel" fork="true" failonerror="true">
+			<classpath>
+				<!-- Include all jar files in the ${lib} directory -->
+				<fileset dir="${lib-dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+</project>
+
+

@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Language</Label>
+	<Description>The primary language used in the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	$map/cm:cmap/cm:res-meta/dc:language/text()
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

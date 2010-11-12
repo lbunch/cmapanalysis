@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Sub Map Count</Label>
+	<Description></Description>
+	<DataType>Number</DataType>
+	<XQueryExpression>
+	
+	count( local:root-concepts($map)/cm:concept )
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>

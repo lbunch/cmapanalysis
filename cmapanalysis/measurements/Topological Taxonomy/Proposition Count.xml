@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>Proposition Count</Label>
+	<Description></Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	count( local:propositions($map)/cm:proposition )
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>
