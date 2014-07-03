@@ -1,0 +1,11 @@
+<cmap-measure>
+	<Label>File Path</Label>
+	<Description>The file name and path of the concept map</Description>
+	<DataType>String</DataType>
+	<XQueryExpression>
+	
+	fn:replace(fn:base-uri($map), '%20', ' ')
+	
+	</XQueryExpression>
+	<XQueryFunctions></XQueryFunctions>
+</cmap-measure>
