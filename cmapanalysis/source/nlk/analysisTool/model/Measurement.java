@@ -228,7 +228,11 @@ public class Measurement implements Comparable
 			
 			for (File childFile: flist)
 			{
-				if (!(childFile.isDirectory() && (childFile.getName().startsWith(".") || childFile.getName().equals("CVS"))))
+				if (childFile.getName().startsWith(".") || childFile.getName().equals("CVS"))
+				{
+					continue;
+				}
+				else
 				{
 					treeNode.add(getTreeNodeForFile(childFile));
 				}
