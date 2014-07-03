@@ -65,9 +65,12 @@ public class TaxonomyProxy
 			// end UTF-8 char conversion workaround
 			
 			startTime = System.currentTimeMillis();
-			Hashtable<String,String> scores = new Hashtable<String,String>();
-			int taxLevel = TopologicalTaxonomy.getLevel(cm, scores);
-			logger.info("score " + (System.currentTimeMillis() - startTime));
+			Hashtable<String,String> mapFeatures = new Hashtable<String,String>();
+			//mapFeatures.put(TopologicalTaxonomy.CMAP_CROSSLINK_COUNT_KEY, "");
+			int taxLevel = TopologicalTaxonomy.getLevel(cm, mapFeatures);
+			logger.info("time to compute score: " + (System.currentTimeMillis() - startTime));
+			logger.info("features: " + mapFeatures);
+			
 			return taxLevel;
 		}
 		catch(Exception e)
